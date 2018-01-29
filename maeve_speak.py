@@ -2,6 +2,8 @@ import boto3
 from pygame import mixer
 import os
 
+# Start with a simple tutorial and extend it to a general liberary eventually.
+
 # Assumes you already registered your API key with AWS python plugin
 
 polly = boto3.client('polly')
