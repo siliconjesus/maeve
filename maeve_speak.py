@@ -11,6 +11,11 @@ polly = boto3.client('polly')
 maeve_voice = 'Joanna'
 maeve_text = sys.argv[1]
 spoken_text = polly.synthesize_speech(Text=maeve_text, OutputFormat='mp3', VoiceId=maeve_voice)
+## AGAIN - this is a terrible hack, but renaming it seems to fix a lot of stuff, but quotes etc
+# are a problem at the moment.   This is a quick workaround to see if I have a mixer
+# issue or a file issue
+maeve_file = maeve_text + ".mp3"
+#print(maeve_file)
 
 with open('output.mp3', 'wb') as f:
 	f.write(spoken_text['AudioStream'].read())
