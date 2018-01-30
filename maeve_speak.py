@@ -1,6 +1,7 @@
 import boto3
 from pygame import mixer
 import os
+import sys
 
 # Start with a simple tutorial and extend it to a general liberary eventually.
 
@@ -8,7 +9,8 @@ import os
 
 polly = boto3.client('polly')
 maeve_voice = 'Joanna'
-spoken_text = polly.synthesize_speech(Text='The Weather today is mostly sunny with a high of 48 deg$rees', OutputFormat='mp3', VoiceId=maeve_voice)
+maeve_text = sys.argv[1]
+spoken_text = polly.synthesize_speech(Text=maeve_text, OutputFormat='mp3', VoiceId=maeve_voice)
 
 with open('output.mp3', 'wb') as f:
 	f.write(spoken_text['AudioStream'].read())
@@ -21,4 +23,5 @@ mixer.music.play()
 while mixer.music.get_busy() == True:
 	pass
 
+#os.remove('output.mp3')
 mixer.quit()
