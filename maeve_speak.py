@@ -14,19 +14,23 @@ spoken_text = polly.synthesize_speech(Text=maeve_text, OutputFormat='mp3', Voice
 ## AGAIN - this is a terrible hack, but renaming it seems to fix a lot of stuff, but quotes etc
 # are a problem at the moment.   This is a quick workaround to see if I have a mixer
 # issue or a file issue
-maeve_file = maeve_text + ".mp3"
+maeve_file = "./mp3/" + maeve_text + ".mp3"
 #print(maeve_file)
 
-with open('output.mp3', 'wb') as f:
+# Check to see if the mp3 directory exists; if not - create it.
+if not os.path.exists('./mp3'):
+	os.makedirs('./mp3')
+
+with open(maeve_file, 'wb') as f:
 	f.write(spoken_text['AudioStream'].read())
 	f.close
 
 mixer.init()
-mixer.music.load('output.mp3')
+mixer.music.load(meave_file)
 mixer.music.play()
 
 while mixer.music.get_busy() == True:
 	pass
 
-#os.remove('output.mp3')
+#os.remove('maeve_file')
 mixer.quit()
