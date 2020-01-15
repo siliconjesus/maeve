@@ -1,6 +1,6 @@
 from WunderWeather import weather
 
-api_key = "c039cc0556bb3ee5"
+api_key = ""
 
 def getCurrentTemperature(here):
 	here = "MD/Hagerstown"
